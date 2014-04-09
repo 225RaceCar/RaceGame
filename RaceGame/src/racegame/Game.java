@@ -18,24 +18,16 @@ import javax.imageio.ImageIO;
 
 public class Game {
 
-    /**
-     * The space rocket with which player will have to land.
-     */
+    //the car class
     private Car playerCar;
     
-    /**
-     * Landing area on which rocket will have to land.
-     */
+    //the finish line
     private LandingArea landingArea;
     
-    /**
-     * Game background image.
-     */
+    //background for the game
     private BufferedImage backgroundImg;
     
-    /**
-     * Red border of the frame. It is used when player crash the rocket.
-     */
+    //image overlayed on bg for when the game is over
     private BufferedImage redBorderImg;
     
 
@@ -45,6 +37,8 @@ public class Game {
         
         Thread threadForInitGame = new Thread() {
             @Override
+            
+            //run the thread for game class
             public void run(){
                 // Sets variables and objects for the game.
                 Initialize();
@@ -58,37 +52,39 @@ public class Game {
     }
     
     
-   /**
-     * Set variables and objects for the game.
-     */
+    //this is where the objects used in the game are actually defined
+    //they are stored in the Game init thread
     private void Initialize()
     {
         playerCar = new Car();
+        
         landingArea  = new LandingArea();
+            
+        
     }
     
-    /**
-     * Load game files - images, sounds, ...
-     */
+   //load global resources like the bg and text for the standings
     private void LoadContent()
     {
         try
         {
+            //load bg image
             URL backgroundImgUrl = this.getClass().getResource("/MoonGame/resources/images/stardust.png");
             backgroundImg = ImageIO.read(backgroundImgUrl);
             
+            //load bg image
             URL redBorderImgUrl = this.getClass().getResource("/MoonGame/resources/images/red_border.png");
             redBorderImg = ImageIO.read(redBorderImgUrl);
         }
+        
+        //if images not found ooooooooops
         catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
     
-    /**
-     * Restart game - reset some variables.
-     */
+    //resets variables in car
     public void RestartGame()
     {
         playerCar.ResetPlayer();
@@ -105,41 +101,44 @@ public class Game {
      */
     public void UpdateGame(long gameTime, Point mousePosition)
     {
-        // Move the rocket
+        // Move the car
         playerCar.Update();
         
-        // Checks where the player rocket is. Is it still in the space or is it raceWin or crashed?
-        // First we check bottom y coordinate of the rocket if is it near the landing area.
-        if(playerCar.y + playerCar.rocketImgHeight - 10 < landingArea.y)
+        // Checks where the player car is. Is it still in the space or is it raceWin or crashed?
+        // First we check bottom y coordinate of the car if is it near the landing area.
+        
+        //if the position of the car is LESS than the landing ara y coordinate
+        //AS LONG AS the Y of car is less than Y of landingArea, finish line
+        //has not bee crossed
+        if(playerCar.y + playerCar.carImgHeight < landingArea.y)
         {
-            // Here we check if the rocket is over landing area.
-            if((playerCar.x > landingArea.x) && (playerCar.x < landingArea.x + landingArea.landingAreaImgWidth - playerCar.rocketImgWidth))
-            {
-                // Here we check if the rocket speed isn't too high.
-                if(playerCar.speedY <= playerCar.topLandingSpeed)
-                    playerCar.raceWin = true;
-                else
-                    playerCar.crashed = true;
-            }
+
+            // Here we check if the car speed isn't too high.
+            if(playerCar.speedY >= playerCar.topLandingSpeed)
+               playerCar.raceWin = true;
             else
-                playerCar.crashed = true;
-                
+               playerCar.crashed = true;
+            
+            //change the gamestate, on next loop gameover will occur
             Framework.gameState = Framework.GameState.GAMEOVER;
         }
     }
     
     /**
      * Draw the game to the screen.
+     * remember that override in Framework drawing earlier
      * 
      * @param g2d Graphics2D
      * @param mousePosition current mouse position.
      */
     public void Draw(Graphics2D g2d, Point mousePosition)
     {
+        
+        //draws according to Framework canvas size 
         g2d.drawImage(backgroundImg, 0, 0, Framework.frameWidth, Framework.frameHeight, null);
         
+        //draw everything we need
         landingArea.Draw(g2d);
-        
         playerCar.Draw(g2d);
     }
     
@@ -155,8 +154,10 @@ public class Game {
     {
         Draw(g2d, mousePosition);
         
+        //draws the text to restart
         g2d.drawString("Press space or enter to restart.", Framework.frameWidth / 2 - 100, Framework.frameHeight / 3 + 70);
         
+        //draw text to say whether you won or lost
         if(playerCar.raceWin)
         {
             g2d.drawString("You have successfully raceWin!", Framework.frameWidth / 2 - 100, Framework.frameHeight / 3);
@@ -165,7 +166,7 @@ public class Game {
         else
         {
             g2d.setColor(Color.red);
-            g2d.drawString("You have crashed the rocket!", Framework.frameWidth / 2 - 95, Framework.frameHeight / 3);
+            g2d.drawString("You have crashed the car!", Framework.frameWidth / 2 - 95, Framework.frameHeight / 3);
             g2d.drawImage(redBorderImg, 0, 0, Framework.frameWidth, Framework.frameHeight, null);
         }
     }

@@ -12,7 +12,7 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
- * The space rocket with which player will have to land.
+ * The space car with which player will have to land.
  * 
  * @author www.gametutorial.net
  */
@@ -32,7 +32,7 @@ public class Car {
     public boolean raceWin;
     
     /**
-     * Has rocket crashed?
+     * Has car crashed?
      */
     public boolean crashed;
         
@@ -42,106 +42,112 @@ public class Car {
     
     
     /**
-     * Stopping/Falling speed of the rocket. Falling speed because, the gravity pulls the rocket down to the moon.
+     * Stopping/Falling speed of the car. Falling speed because, the gravity pulls the car down to the moon.
      */
     private int speedStopping;
     
     /**
-     * Maximum speed that rocket can have without having a crash when landing.
+     * Maximum speed that car can have without having a crash when landing.
      */
     public int topLandingSpeed;
     
     /**
-     * How fast and to which direction rocket is moving on x coordinate?
+     * How fast and to which direction car is moving on x coordinate?
      */
     private int speedX;
     /**
-     * How fast and to which direction rocket is moving on y coordinate?
+     * How fast and to which direction car is moving on y coordinate?
      */
     public int speedY;
             
     
     /**
-     * Image of the rocket in air.
+     * Image of the car in air.
      */
-    private BufferedImage rocketImg;
+    private BufferedImage carImg;
     /**
-     * Image of the rocket when raceWin.
+     * Image of the car when raceWin.
      */
-    private BufferedImage rocketLandedImg;
+    private BufferedImage carWonImg;
     /**
-     * Image of the rocket when crashed.
+     * Image of the car when crashed.
      */
-    private BufferedImage rocketCrashedImg;
+    private BufferedImage carCrashedImg;
     /**
-     * Image of the rocket fire.
+     * Image of the car fire.
      */
-    private BufferedImage rocketFireImg;
+    private BufferedImage carFireImg;
     
     /**
-     * Width of rocket.
+     * Width of car.
      */
-    public int rocketImgWidth;
+    public int carImgWidth;
     /**
-     * Height of rocket.
+     * Height of car.
      */
-    public int rocketImgHeight;
+    public int carImgHeight;
     
     
     public Car()
     {
+        //load resources
         Initialize();
         LoadContent();
         
-        // Now that we have rocketImgWidth we set starting x coordinate.
-        x = random.nextInt(Framework.frameWidth - rocketImgWidth);
+        // Now that we have carImgWidth we set starting x coordinate.
+        x = random.nextInt(Framework.frameWidth - carImgWidth);
     }
     
     
     private void Initialize()
     {
+        //random int to use when setting the car
         random = new Random();
         
+        //this is also used to restart the game, but it does the same thing
         ResetPlayer();
         
+        //used for control
         speedAccelerating = 2;
         speedStopping = 1;
         
-        topLandingSpeed = 5;
+        //used for "crossing the finish line"
+        topLandingSpeed = 2;
     }
     
+    
+    //load car resources
     private void LoadContent()
     {
         try
         {
-            URL rocketImgUrl = this.getClass().getResource("/MoonGame/resources/images/car.png");
-            rocketImg = ImageIO.read(rocketImgUrl);
-            rocketImgWidth = rocketImg.getWidth();
-            rocketImgHeight = rocketImg.getHeight();
+            URL carImgUrl = this.getClass().getResource("/MoonGame/resources/images/car.png");
+            carImg = ImageIO.read(carImgUrl);
+            carImgWidth = carImg.getWidth();
+            carImgHeight = carImg.getHeight();
             
-            URL rocketLandedImgUrl = this.getClass().getResource("/MoonGame/resources/images/rocket_landed.png");
-            rocketLandedImg = ImageIO.read(rocketLandedImgUrl);
+            URL carWonImgUrl = this.getClass().getResource("/MoonGame/resources/images/car.png");
+            carWonImg = ImageIO.read(carWonImgUrl);
             
-            URL rocketCrashedImgUrl = this.getClass().getResource("/MoonGame/resources/images/rocket_crashed.png");
-            rocketCrashedImg = ImageIO.read(rocketCrashedImgUrl);
+            URL carCrashedImgUrl = this.getClass().getResource("/MoonGame/resources/images/car.png");
+            carCrashedImg = ImageIO.read(carCrashedImgUrl);
             
-            URL rocketFireImgUrl = this.getClass().getResource("/MoonGame/resources/images/rocket_fire.png");
-            rocketFireImg = ImageIO.read(rocketFireImgUrl);
+//            URL carFireImgUrl = this.getClass().getResource("/MoonGame/resources/images/car_fire.png");
+//            carFireImg = ImageIO.read(carFireImgUrl);
         }
         catch (IOException ex) {
             Logger.getLogger(Car.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    /**
-     * Here we set up the rocket when we starting a new game.
-     */
+    //set variables for a new game
     public void ResetPlayer()
     {
         raceWin = false;
         crashed = false;
         
-        x = random.nextInt(Framework.frameWidth - rocketImgWidth);
+        //place the car on the canvas
+        x = random.nextInt(Framework.frameWidth - carImgWidth);
         y = (int)(Framework.frameHeight * 0.90);;
         
         speedX = 0;
@@ -150,18 +156,20 @@ public class Car {
     
     
     /**
-     * Here we move the rocket.
+     * Here we move the car.
      */
     
     public void Update()
     {
-        // Calculating speed for moving up or down.
+        
+        //the following all increase the speed as a key is pressed
+        // Calculating speed for moving up 
         if(Canvas.keyboardKeyState(KeyEvent.VK_W))
             speedY -= speedAccelerating;
         else
             //speedY += speedStopping;
             
-        // Calculating speed for moving up or down.
+        // Calculating speed for moving down.
         if(Canvas.keyboardKeyState(KeyEvent.VK_S))
             speedY += speedAccelerating;
         else
@@ -176,38 +184,45 @@ public class Car {
         // Calculating speed for moving or stopping to the right.
         if(Canvas.keyboardKeyState(KeyEvent.VK_D))
             speedX += speedAccelerating;
+        
+        //if no keys are being press slow the car
         else if(speedX > 0)
             speedX -= speedStopping;
         
-        // Moves the rocket.
+        // Moves the car.
         x += speedX;
         y += speedY;
     }
     
     public void Draw(Graphics2D g2d)
     {
-        g2d.setColor(Color.white);
-        g2d.drawString("Rocket coordinates: " + x + " : " + y, 5, 15);
         
-        // If the rocket is raceWin.
+        //*******************************************
+        //text coordinates
+        g2d.setColor(Color.white);
+        g2d.drawString("Car coordinates: " + x + " : " + y, 5, 15);
+        
+        // If the car is raceWin.
+        
+        //image for winnging
         if(raceWin)
         {
-            g2d.drawImage(rocketLandedImg, x, y, null);
+            g2d.drawImage(carWonImg, x, y, null);
         }
-        // If the rocket is crashed.
+        // If the car is crashed.
         else if(crashed)
         {
-            g2d.drawImage(rocketCrashedImg, x, y + rocketImgHeight - rocketCrashedImg.getHeight(), null);
+            g2d.drawImage(carCrashedImg, x, y + carImgHeight - carCrashedImg.getHeight(), null);
         }
-        // If the rocket is still in the space.
+        // If the car is still in the space.
         else
         {
-            // If player hold down a W key we draw rocket fire.
+            // If player hold down a W key we draw car fire.
             
-            //removed because it isn't a rocket car
+            //removed because it isn't a car car
 //            if(Canvas.keyboardKeyState(KeyEvent.VK_W))
-//                g2d.drawImage(rocketFireImg, x + 12, y + 66, null);
-            g2d.drawImage(rocketImg, x, y, null);
+//                g2d.drawImage(carFireImg, x + 12, y + 66, null);
+            g2d.drawImage(carImg, x, y, null);
         }
     }
     

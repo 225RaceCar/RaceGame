@@ -11,12 +11,11 @@ import javax.swing.SwingUtilities;
 
 public class Window extends JFrame{
         
-    private Window()
-    {
+    private Window(){
         // Sets the title for this frame.
         this.setTitle("Race Car Game");
         
-        // Sets size of the frame.
+        // Sets size of the frame, checks for full screen
         if(false) // Full screen mode
         {
             // Disables decorations for this frame.
