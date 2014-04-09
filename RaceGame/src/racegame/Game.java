@@ -20,6 +20,7 @@ public class Game {
 
     //the car class
     private Car playerCar;
+    private EnemyCar enemyCar;
     
     //the finish line
     private LandingArea landingArea;
@@ -57,7 +58,7 @@ public class Game {
     private void Initialize()
     {
         playerCar = new Car();
-        
+        enemyCar = new EnemyCar();
         landingArea  = new LandingArea();
             
         
@@ -140,6 +141,7 @@ public class Game {
         //draw everything we need
         landingArea.Draw(g2d);
         playerCar.Draw(g2d);
+        enemyCar.Draw(g2d);
     }
     
     
