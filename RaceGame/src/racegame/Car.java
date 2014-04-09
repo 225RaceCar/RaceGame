@@ -1,4 +1,4 @@
-package moongame;
+package racegame;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -119,7 +119,7 @@ public class Car {
             rocketImgWidth = rocketImg.getWidth();
             rocketImgHeight = rocketImg.getHeight();
             
-            URL rocketLandedImgUrl = this.getClass().getResource("/MoonGame/resources/images/rocket_raceWin.png");
+            URL rocketLandedImgUrl = this.getClass().getResource("/MoonGame/resources/images/rocket_landed.png");
             rocketLandedImg = ImageIO.read(rocketLandedImgUrl);
             
             URL rocketCrashedImgUrl = this.getClass().getResource("/MoonGame/resources/images/rocket_crashed.png");
@@ -142,7 +142,7 @@ public class Car {
         crashed = false;
         
         x = random.nextInt(Framework.frameWidth - rocketImgWidth);
-        y = 10;
+        y = (int)(Framework.frameHeight * 0.90);;
         
         speedX = 0;
         speedY = 0;
@@ -152,13 +152,20 @@ public class Car {
     /**
      * Here we move the rocket.
      */
+    
     public void Update()
     {
         // Calculating speed for moving up or down.
         if(Canvas.keyboardKeyState(KeyEvent.VK_W))
             speedY -= speedAccelerating;
         else
-            speedY += speedStopping;
+            //speedY += speedStopping;
+            
+        // Calculating speed for moving up or down.
+        if(Canvas.keyboardKeyState(KeyEvent.VK_S))
+            speedY += speedAccelerating;
+        else
+            //speedY += speedStopping;
         
         // Calculating speed for moving or stopping to the left.
         if(Canvas.keyboardKeyState(KeyEvent.VK_A))
@@ -196,8 +203,10 @@ public class Car {
         else
         {
             // If player hold down a W key we draw rocket fire.
-            if(Canvas.keyboardKeyState(KeyEvent.VK_W))
-                g2d.drawImage(rocketFireImg, x + 12, y + 66, null);
+            
+            //removed because it isn't a rocket car
+//            if(Canvas.keyboardKeyState(KeyEvent.VK_W))
+//                g2d.drawImage(rocketFireImg, x + 12, y + 66, null);
             g2d.drawImage(rocketImg, x, y, null);
         }
     }

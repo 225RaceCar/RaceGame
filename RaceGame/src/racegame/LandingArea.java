@@ -1,4 +1,4 @@
-package moongame;
+package racegame;
 
 import java.awt.Graphics2D;
 import java.awt.image.BufferedImage;
@@ -46,16 +46,16 @@ public class LandingArea {
     private void Initialize()
     {   
         // X coordinate of the landing area is at 23% frame width.
-        x = (int)(Framework.frameWidth * 0.20);
+        x = (int)(Framework.frameWidth * 0.70);
         // Y coordinate of the landing area is at 20% frame height.
-        y = (int)(Framework.frameHeight * 0.80);
+        y = (int)(Framework.frameHeight * 0.20);
     }
     
     private void LoadContent()
     {
         try
         {
-            URL landingAreaImgUrl = this.getClass().getResource("/MoonGame/resources/images/landing_area.png");
+            URL landingAreaImgUrl = this.getClass().getResource("/MoonGame/resources/images/track.png");
             landingAreaImg = ImageIO.read(landingAreaImgUrl);
             landingAreaImgWidth = landingAreaImg.getWidth();
         }

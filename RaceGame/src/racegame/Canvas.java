@@ -1,4 +1,4 @@
-package moongame;
+package racegame;
 
 import java.awt.Color;
 import java.awt.Cursor;

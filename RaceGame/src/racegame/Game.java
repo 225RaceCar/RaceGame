@@ -1,4 +1,4 @@
-package moongame;
+package racegame;
 
 import java.awt.Color;
 import java.awt.Graphics2D;
@@ -98,6 +98,8 @@ public class Game {
     /**
      * Update game logic.
      * 
+     * THIS IS WHERE THE CAR NEEDS TO HIT SOMETHING TO WIN
+     * 
      * @param gameTime gameTime of the game.
      * @param mousePosition current mouse position.
      */
@@ -108,7 +110,7 @@ public class Game {
         
         // Checks where the player rocket is. Is it still in the space or is it raceWin or crashed?
         // First we check bottom y coordinate of the rocket if is it near the landing area.
-        if(playerCar.y + playerCar.rocketImgHeight - 10 > landingArea.y)
+        if(playerCar.y + playerCar.rocketImgHeight - 10 < landingArea.y)
         {
             // Here we check if the rocket is over landing area.
             if((playerCar.x > landingArea.x) && (playerCar.x < landingArea.x + landingArea.landingAreaImgWidth - playerCar.rocketImgWidth))

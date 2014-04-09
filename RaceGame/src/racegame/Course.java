@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package moongame;
+package racegame;
 
 import java.awt.image.BufferedImage;
 import java.io.IOException;
@@ -41,7 +41,7 @@ public class Course {
     private void initialize(){
          // X coordinate of the landing area is at 23% frame width.
         x = (int)(Framework.frameWidth * 0.20);
-        // Y coordinate of the landing area is at 20% frame height.
+        // Y coordinate of the landing area is at 80% frame height.
         y = (int)(Framework.frameHeight * 0.80);
     }
     
@@ -49,7 +49,7 @@ public class Course {
     {
         try
         {
-            URL landingAreaImgUrl = this.getClass().getResource("/MoonGame/resources/images/landing_area.png");
+            URL landingAreaImgUrl = this.getClass().getResource("/MoonGame/resources/images/track.png");
             courseImg = ImageIO.read(landingAreaImgUrl);
             courseWidth = courseImg.getWidth();
         }
