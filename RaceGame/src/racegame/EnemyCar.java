@@ -222,7 +222,7 @@ public class EnemyCar {
             //removed because it isn't a car car
 //            if(Canvas.keyboardKeyState(KeyEvent.VK_W))
 //                g2d.drawImage(carFireImg, x + 12, y + 66, null);
-            g2d.drawImage(carImg, x, y, null);
+         g2d.drawImage(carImg, x, y, null);
         }
     }
     

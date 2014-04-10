@@ -6,6 +6,7 @@ import java.awt.Point;
 import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
+import java.util.ArrayList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -18,12 +19,17 @@ import javax.imageio.ImageIO;
 
 public class Game {
 
+    //set the first course position place x and y
+    private double x = 0.25;
+    private double y = 0.40;
+    
+    
     //the car class
     private Car playerCar;
     private EnemyCar enemyCar;
     
-    //the finish line
-    private LandingArea landingArea;
+    //the course, last part should be the finish line
+    private ArrayList<Course> courseList = new ArrayList<Course>();
     
     //background for the game
     private BufferedImage backgroundImg;
@@ -59,7 +65,8 @@ public class Game {
     {
         playerCar = new Car();
         enemyCar = new EnemyCar();
-        landingArea  = new LandingArea();
+        
+        CreateCourse();
             
         
     }
@@ -89,7 +96,31 @@ public class Game {
     public void RestartGame()
     {
         playerCar.ResetPlayer();
+        
+        //clear list
+        courseList.clear();
     }
+    
+    
+    
+    
+    private void CreateCourse(){
+        
+        for(int i = 0; i < 3; i++)
+        {
+            Course segment = new Course(x, y + .01);
+            
+            courseList.add(segment);
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
     
     
     /**
@@ -109,9 +140,9 @@ public class Game {
         // First we check bottom y coordinate of the car if is it near the landing area.
         
         //if the position of the car is LESS than the landing ara y coordinate
-        //AS LONG AS the Y of car is less than Y of landingArea, finish line
+        //AS LONG AS the Y of car is less than Y of course, finish line
         //has not bee crossed
-        if(playerCar.y + playerCar.carImgHeight < landingArea.y)
+        if(playerCar.y + playerCar.carImgHeight < courseList.get(courseList.size() - 1).y)
         {
 
             // Here we check if the car speed isn't too high.
@@ -139,9 +170,15 @@ public class Game {
         g2d.drawImage(backgroundImg, 0, 0, Framework.frameWidth, Framework.frameHeight, null);
         
         //draw everything we need
-        landingArea.Draw(g2d);
+//        courseList.Draw(g2d);
         playerCar.Draw(g2d);
         enemyCar.Draw(g2d);
+    
+        // Draws all the enemies.
+        for(int i = 0; i < courseList.size(); i++)
+        {
+            courseList.get(i).Draw(g2d);
+        }
     }
     
     
