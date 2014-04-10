@@ -20,8 +20,8 @@ import javax.imageio.ImageIO;
 public class Game {
 
     //set the first course position place x and y
-    private double x = 0.25;
-    private double y = 0.40;
+    private double x = 0.20;
+    private double y = 0.50;
     
     
     //the car class
@@ -71,6 +71,32 @@ public class Game {
         
     }
     
+    
+    
+    
+    //when game is initialized the course is created
+    private void CreateCourse(){
+        
+        for(int i = 0; i < 5; i++)
+        {
+            //create course object
+            Course segment = new Course(x, y - (i * 0.05));
+            
+            //add that course to the CourseList
+            courseList.add(segment);
+        }
+        
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
    //load global resources like the bg and text for the standings
     private void LoadContent()
     {
@@ -93,8 +119,7 @@ public class Game {
     
     
     //resets variables in car
-    public void RestartGame()
-    {
+    public void RestartGame(){
         playerCar.ResetPlayer();
         
         //clear list
@@ -104,16 +129,6 @@ public class Game {
     
     
     
-    private void CreateCourse(){
-        
-        for(int i = 0; i < 3; i++)
-        {
-            Course segment = new Course(x, y + .01);
-            
-            courseList.add(segment);
-        }
-        
-    }
     
     
     
@@ -142,6 +157,8 @@ public class Game {
         //if the position of the car is LESS than the landing ara y coordinate
         //AS LONG AS the Y of car is less than Y of course, finish line
         //has not bee crossed
+        
+        //carImgHeight can be removed
         if(playerCar.y + playerCar.carImgHeight < courseList.get(courseList.size() - 1).y)
         {
 
@@ -163,22 +180,23 @@ public class Game {
      * @param g2d Graphics2D
      * @param mousePosition current mouse position.
      */
-    public void Draw(Graphics2D g2d, Point mousePosition)
-    {
+    public void Draw(Graphics2D g2d, Point mousePosition){
         
         //draws according to Framework canvas size 
         g2d.drawImage(backgroundImg, 0, 0, Framework.frameWidth, Framework.frameHeight, null);
         
         //draw everything we need
-//        courseList.Draw(g2d);
-        playerCar.Draw(g2d);
-        enemyCar.Draw(g2d);
+        //courseList.Draw(g2d);
+        
     
-        // Draws all the enemies.
+        // Draws the course objects
         for(int i = 0; i < courseList.size(); i++)
         {
             courseList.get(i).Draw(g2d);
         }
+        
+        playerCar.Draw(g2d);
+        enemyCar.Draw(g2d);
     }
     
     

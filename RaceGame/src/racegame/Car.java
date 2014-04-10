@@ -94,8 +94,8 @@ public class Car {
         Initialize();
         LoadContent();
         
-        // Now that we have carImgWidth we set starting x coordinate.
-        x = random.nextInt(Framework.frameWidth - carImgWidth);
+        //will set the starting coordinate
+        x = (int)(Framework.frameWidth * 0.20);
     }
     
     
@@ -147,7 +147,7 @@ public class Car {
         crashed = false;
         
         //place the car on the canvas
-        x = random.nextInt(Framework.frameWidth - carImgWidth);
+        x = (int)(Framework.frameWidth * 0.20);
         y = (int)(Framework.frameHeight * 0.90);;
         
         speedX = 0;
