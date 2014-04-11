@@ -77,7 +77,18 @@ public class Course {
     }
     
     
+    public void changeColor(){
+        try
+        {
+            URL landingAreaImgUrl = this.getClass().getResource("/MoonGame/resources/images/track2.png");
+            landingAreaImg = ImageIO.read(landingAreaImgUrl);
+            landingAreaImgWidth = landingAreaImg.getWidth();
+        }
+        catch (IOException ex) {
+            Logger.getLogger(Course.class.getName()).log(Level.SEVERE, null, ex);
+        }
     
+    }
     
     
     
