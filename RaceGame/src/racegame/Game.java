@@ -129,7 +129,7 @@ public class Game {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
         
-        movingBg.Initialize(bg, -1, Framework.frameHeight);
+        movingBg.Initialize(bg, -1, Framework.frameWidth / 10);
     }
     
     
@@ -165,13 +165,14 @@ public class Game {
     {
         // Move the car
         playerCar.Update();
+        movingBg.Update();
         
         // Checks where the player car is. Is it still in the space or is it raceWin or crashed?
-        // First we check bottom y coordinate of the car if is it near the landing area.
         
-        //if the position of the car is LESS than the landing ara y coordinate
-        //AS LONG AS the Y of car is less than Y of course, finish line
-        //has not bee crossed
+        
+        
+        //AS LONG AS the Y of car is less than Y of the last course, finish line
+        //has not been crossed
         
         //carImgHeight can be removed
         if(playerCar.y + playerCar.carImgHeight < courseList.get(courseList.size() - 1).y)
@@ -200,8 +201,9 @@ public class Game {
         //draws according to Framework canvas size 
         //g2d.drawImage(backgroundImg, 0, 0, Framework.frameWidth, Framework.frameHeight, null);
         
-        
+        //draw moving bg???????
         movingBg.Draw(g2d);
+        
         
     
         // Draws the course objects
@@ -214,8 +216,7 @@ public class Game {
         playerCar.Draw(g2d);
         enemyCar.Draw(g2d);
         
-        //draw moving bg???????
-        movingBg.Draw(g2d);
+        
     }
     
     

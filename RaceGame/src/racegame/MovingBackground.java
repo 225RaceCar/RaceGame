@@ -7,7 +7,7 @@ import java.awt.image.BufferedImage;
  * Moving background image.
  * Move the image left or right in a loop.
  * 
- * @author www.gametutorial.net
+ * 
  */
 
 public class MovingBackground {
@@ -19,8 +19,8 @@ public class MovingBackground {
     private double speed;
 
     // Positions of background
-    private double xPositions[];
-    private int yPosition;
+    private int xPosition;
+    private double yPositions[];
 
 
     /**
@@ -28,23 +28,23 @@ public class MovingBackground {
      * 
      * @param image Image that will be moving.
      * @param speed How fast and into which direction should the image move? If number is negative, image will move into left. If you use decimal number, in some cases image can cover one over another at the end point, or could be spaces between images, so try another number.
-     * @param yPosition y coordinate of the image.
+     * @param xPosition y coordinate of the image.
      */
-    public void Initialize(BufferedImage image, double speed, int yPosition)
+    public void Initialize(BufferedImage image, double speed, int xPosition)
     {
         this.image = image;
         this.speed = speed;
 
-        this.yPosition = yPosition;
+        this.xPosition = xPosition;
 
         // We divide frame size with image size do that we get how many times we need to draw image to screen.
-        int numberOfPositions = (Framework.frameWidth / this.image.getWidth()) + 2; // We need to add 2 so that we don't get blank spaces between images.
-        xPositions = new double[numberOfPositions];
+        int numberOfPositions = (Framework.frameHeight / this.image.getHeight()) + 2; // We need to add 2 so that we don't get blank spaces between images.
+        yPositions = new double[numberOfPositions];
 
-        // Set x coordinate for each image that we need to draw.
-        for (int i = 0; i < xPositions.length; i++)
+        // Set y coordinate for each image that we need to draw.
+        for (int i = 0; i < yPositions.length; i++)
         {
-            xPositions[i] = i * image.getWidth();
+            yPositions[i] = i * image.getHeight();
         }
     }
 
@@ -52,29 +52,28 @@ public class MovingBackground {
     /**
      * Moves images.
      */
-    private void Update()
+    public void Update()
     {
-        for (int i = 0; i < xPositions.length; i++)
+        for (int i = 0; i < yPositions.length; i++)
         {
             // Move image
-            xPositions[i] += speed;
+            yPositions[i] += speed;
 
             // If image moving left
-            if (speed < 0)
-            {
+            if (speed < 0){
                 // If image is out of the screen, it moves it to the end of line of images.
-                if (xPositions[i] <= -image.getWidth())
+                if (yPositions[i] <= -image.getHeight())
                 {
-                    xPositions[i] = image.getWidth() * (xPositions.length - 1);
+                    yPositions[i] = image.getHeight() * (yPositions.length - 1);
                 }
             }
             // If image moving right
             else
             {
                 // If image is out of the screen, it moves it to the end of line of images.
-                if (xPositions[i] >= image.getWidth() * (xPositions.length - 1))
+                if (yPositions[i] >= image.getHeight() * (yPositions.length - 1))
                 {
-                    xPositions[i] = -image.getWidth();
+                    yPositions[i] = -image.getHeight();
                 }
             }
         }
@@ -87,11 +86,11 @@ public class MovingBackground {
      */
     public void Draw(Graphics2D g2d)
     {
-        this.Update();
         
-        for (int i = 0; i < xPositions.length; i++)
+        
+        for (int i = 0; i < yPositions.length; i++)
         {
-            g2d.drawImage(image, (int)xPositions[i], yPosition, null);
+            g2d.drawImage(image, xPosition, (int)yPositions[i] , null);
         }
     }
 }

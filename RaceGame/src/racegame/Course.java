@@ -25,6 +25,12 @@ public class Course {
      */
     public int y;
     
+    
+    
+    
+    private double speed = 1;
+    
+    
     /**
      * Image of landing area.
      */
@@ -65,9 +71,12 @@ public class Course {
     }
     
     
+    public void Update(){
+        
+        y += speed;
+    }
     
     
-
     
     
     
@@ -78,6 +87,7 @@ public class Course {
     
     public void Draw(Graphics2D g2d)
     {
+        this.Update();
         g2d.drawImage(landingAreaImg, x, y, null);
     }
     
