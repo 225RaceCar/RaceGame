@@ -84,7 +84,7 @@ public class Game {
     //when game is initialized the course is created
     private void CreateCourse(){
         
-        for(int i = 0; i < 200; i++)
+        for(int i = 0; i < 30; i++)
         {
             
             //create course object
@@ -166,6 +166,10 @@ public class Game {
         // Move the car
         playerCar.Update();
         movingBg.Update();
+        
+        for(int i = 0; i < courseList.size(); i++){
+            courseList.get(i).Update();
+        }
         
         // Checks where the player car is. Is it still in the space or is it raceWin or crashed?
         

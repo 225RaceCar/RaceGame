@@ -87,7 +87,7 @@ public class Course {
     
     public void Draw(Graphics2D g2d)
     {
-        this.Update();
+        //this.Update();
         g2d.drawImage(landingAreaImg, x, y, null);
     }
     
