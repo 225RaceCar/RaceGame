@@ -12,9 +12,9 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
 /**
- * The space car with which player will have to land.
+ * The car with which player will have to land.
  * 
- * @author www.gametutorial.net
+ * 
  */
 
 public class Car {

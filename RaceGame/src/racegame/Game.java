@@ -14,19 +14,23 @@ import javax.imageio.ImageIO;
 /**
  * Actual game.
  * 
- * @author www.gametutorial.net
  */
 
 public class Game {
 
-    //set the first course position place x and y
+    //set the FIRST course position place x and y
+    //subsequent courses will be placed by the for loop, multiplies by i
     private double x = 0.20;
-    private double y = 0.50;
+    private double y = 0.90;
     
     
     //the car class
     private Car playerCar;
     private EnemyCar enemyCar;
+    
+    
+    private BufferedImage bg;
+    private MovingBackground movingBg;
     
     //the course, last part should be the finish line
     private ArrayList<Course> courseList = new ArrayList<Course>();
@@ -69,6 +73,9 @@ public class Game {
         CreateCourse();
             
         
+        
+        movingBg = new MovingBackground();
+        
     }
     
     
@@ -77,10 +84,11 @@ public class Game {
     //when game is initialized the course is created
     private void CreateCourse(){
         
-        for(int i = 0; i < 5; i++)
+        for(int i = 0; i < 200; i++)
         {
+            
             //create course object
-            Course segment = new Course(x, y - (i * 0.05));
+            Course segment = new Course(x, y - (i * 0.035));
             
             //add that course to the CourseList
             courseList.add(segment);
@@ -103,9 +111,14 @@ public class Game {
         try
         {
             //load bg image
-            URL backgroundImgUrl = this.getClass().getResource("/MoonGame/resources/images/stardust.png");
-            backgroundImg = ImageIO.read(backgroundImgUrl);
+            URL bgUrl = this.getClass().getResource("/MoonGame/resources/images/stardust.png");
+            bg = ImageIO.read(bgUrl);
             
+            //loading background image
+            //load bg image
+            URL backgroundImageUrl = this.getClass().getResource("/MoonGame/resources/images/stardust.png");
+            backgroundImg = ImageIO.read(bgUrl);
+
             //load bg image
             URL redBorderImgUrl = this.getClass().getResource("/MoonGame/resources/images/red_border.png");
             redBorderImg = ImageIO.read(redBorderImgUrl);
@@ -115,6 +128,8 @@ public class Game {
         catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
+        
+        movingBg.Initialize(bg, -1, Framework.frameHeight);
     }
     
     
@@ -183,10 +198,10 @@ public class Game {
     public void Draw(Graphics2D g2d, Point mousePosition){
         
         //draws according to Framework canvas size 
-        g2d.drawImage(backgroundImg, 0, 0, Framework.frameWidth, Framework.frameHeight, null);
+        //g2d.drawImage(backgroundImg, 0, 0, Framework.frameWidth, Framework.frameHeight, null);
         
-        //draw everything we need
-        //courseList.Draw(g2d);
+        
+        movingBg.Draw(g2d);
         
     
         // Draws the course objects
@@ -195,8 +210,12 @@ public class Game {
             courseList.get(i).Draw(g2d);
         }
         
+        //draw the cares
         playerCar.Draw(g2d);
         enemyCar.Draw(g2d);
+        
+        //draw moving bg???????
+        movingBg.Draw(g2d);
     }
     
     

@@ -95,7 +95,7 @@ public class EnemyCar {
         LoadContent();
         
         // Now that we have carImgWidth we set starting x coordinate.
-        x = random.nextInt(Framework.frameWidth - carImgWidth);
+        x = x = (int)(Framework.frameWidth * 0.60);
     }
     
     
@@ -121,15 +121,15 @@ public class EnemyCar {
     {
         try
         {
-            URL carImgUrl = this.getClass().getResource("/MoonGame/resources/images/car.png");
+            URL carImgUrl = this.getClass().getResource("/MoonGame/resources/images/car2.png");
             carImg = ImageIO.read(carImgUrl);
             carImgWidth = carImg.getWidth();
             carImgHeight = carImg.getHeight();
             
-            URL carWonImgUrl = this.getClass().getResource("/MoonGame/resources/images/car.png");
+            URL carWonImgUrl = this.getClass().getResource("/MoonGame/resources/images/car2.png");
             carWonImg = ImageIO.read(carWonImgUrl);
             
-            URL carCrashedImgUrl = this.getClass().getResource("/MoonGame/resources/images/car.png");
+            URL carCrashedImgUrl = this.getClass().getResource("/MoonGame/resources/images/car2.png");
             carCrashedImg = ImageIO.read(carCrashedImgUrl);
             
 //            URL carFireImgUrl = this.getClass().getResource("/MoonGame/resources/images/car_fire.png");
