@@ -98,15 +98,16 @@ public class Game {
         }
 
         for (int j = 0; j < points.length; j++) {
+            points[j] = points[j] / 50;
             
-            
-            for (int i = 0; i < 30; i++) {
+            for (int i = 0; i < points[j]; i++) {
                 //create course object
                 Course segment = new Course(x, y - (i * 0.035));
 
                 //add that course to the CourseList
                 courseList.add(segment);
-                
+                System.out.println(points[j/10]);
+                System.out.println(points[j/100]);
                 
             }
         }
