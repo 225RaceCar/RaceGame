@@ -20,6 +20,7 @@ public class Course {
      * X coordinate of the landing area.
      */
     public int x;
+    
     /**
      * Y coordinate of the landing area.
      */
@@ -72,7 +73,6 @@ public class Course {
     
     
     public void Update(){
-        
         y += speed;
     }
     

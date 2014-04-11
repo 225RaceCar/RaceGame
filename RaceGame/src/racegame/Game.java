@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.net.URL;
 import java.util.ArrayList;
+import java.util.Random;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
@@ -22,6 +23,9 @@ public class Game {
     //subsequent courses will be placed by the for loop, multiplies by i
     private double x = 0.20;
     private double y = 0.90;
+    
+    
+    Random random = new Random();
     
     
     //the car class
@@ -67,13 +71,14 @@ public class Game {
     //they are stored in the Game init thread
     private void Initialize()
     {
+        //initialize cars
         playerCar = new Car();
         enemyCar = new EnemyCar();
         
+        //create the course
         CreateCourse();
-            
         
-        
+        //create the background
         movingBg = new MovingBackground();
         
     }
@@ -82,18 +87,24 @@ public class Game {
     
     
     //when game is initialized the course is created
-    private void CreateCourse(){
-        
-        for(int i = 0; i < 30; i++)
-        {
-            
-            //create course object
-            Course segment = new Course(x, y - (i * 0.035));
-            
-            //add that course to the CourseList
-            courseList.add(segment);
+    private void CreateCourse() {
+
+        int[] points = new int[4];
+
+        for (int i = 0; i < points.length; i++) {
+            points[i] = random.nextInt(1500) + 100;
         }
-        
+
+        for (int j = 0; j < points.length; j++) {
+            for (int i = 0; i < 30; i++) {
+                //create course object
+                Course segment = new Course(x, y - (i * 0.035));
+
+                //add that course to the CourseList
+                courseList.add(segment);
+            }
+        }
+
     }
     
     
