@@ -36,6 +36,8 @@ public class Game {
     private BufferedImage bg;
     private MovingBackground movingBg;
     
+    private int[] courseListList = new int[4];
+    
     //the course, last part should be the finish line
     private ArrayList<Course> courseList = new ArrayList<Course>();
     
@@ -96,12 +98,16 @@ public class Game {
         }
 
         for (int j = 0; j < points.length; j++) {
+            
+            
             for (int i = 0; i < 30; i++) {
                 //create course object
                 Course segment = new Course(x, y - (i * 0.035));
 
                 //add that course to the CourseList
                 courseList.add(segment);
+                
+                
             }
         }
 

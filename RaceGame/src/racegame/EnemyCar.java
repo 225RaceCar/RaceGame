@@ -199,8 +199,8 @@ public class EnemyCar {
         
         //*******************************************
         //text coordinates
-        g2d.setColor(Color.white);
-        g2d.drawString("Car coordinates: " + x + " : " + y, 5, 15);
+//        g2d.setColor(Color.white);
+//        g2d.drawString("Car coordinates: " + x + " : " + y, 5, 15);
         
         // If the car is raceWin.
         
