@@ -31,9 +31,7 @@ public class Car {
     //is race over?
     public boolean raceWin;
     
-    /**
-     * Has car crashed?
-     */
+    //has car crashed
     public boolean crashed;
         
     //accelerating speed 
@@ -41,23 +39,14 @@ public class Car {
     
     
     
-    /**
-     * Stopping/Falling speed of the car. Falling speed because, the gravity pulls the car down to the moon.
-     */
+    //sets the speed to counter movement
     private int speedStopping;
     
-    /**
-     * Maximum speed that car can have without having a crash when landing.
-     */
+    
     public int topLandingSpeed;
     
-    /**
-     * How fast and to which direction car is moving on x coordinate?
-     */
+    //how fast and in what direction is the car moving
     private int speedX;
-    /**
-     * How fast and to which direction car is moving on y coordinate?
-     */
     public int speedY;
             
     

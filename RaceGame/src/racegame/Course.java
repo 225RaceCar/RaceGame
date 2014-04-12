@@ -10,96 +10,85 @@ import javax.imageio.ImageIO;
 
 /**
  * Landing area where rocket will land.
- * 
+ *
  * @author www.gametutorial.net
  */
-
 public class Course {
-    
+
     /**
      * X coordinate of the landing area.
      */
     public int x;
-    
+
     /**
      * Y coordinate of the landing area.
      */
     public int y;
-    
-    
-    
-    
+
     private double speed = 1;
-    
-    
+
     /**
      * Image of landing area.
      */
-    private BufferedImage landingAreaImg;
-    
+    private BufferedImage trackImg0;
+    private BufferedImage trackImg1;
+    private BufferedImage trackImg2;
+    private BufferedImage trackImg3;
+
+    private BufferedImage trackImg;
+
     /**
      * Width of landing area.
      */
-    public int landingAreaImgWidth;
-    
-    
-    public Course(double x, double y)
-    {
+    public int trackImgWidth;
+
+    public Course(double x, double y, int img) {
         Initialize(x, y);
-        LoadContent();
+        LoadContent(img);
     }
-    
-    
-    private void Initialize(double x, double y)
-    {   
+
+    private void Initialize(double x, double y) {
         // X coordinate of the landing area is at 23% frame width.
-        this.x = (int)(Framework.frameWidth * x);
+        this.x = (int) (Framework.frameWidth * x);
         // Y coordinate of the landing area is at 20% frame height.
-        this.y = (int)(Framework.frameHeight * y);
+        this.y = (int) (Framework.frameHeight * y);
     }
-    
-    private void LoadContent()
-    {
-        try
-        {
-            URL landingAreaImgUrl = this.getClass().getResource("/MoonGame/resources/images/track.png");
-            landingAreaImg = ImageIO.read(landingAreaImgUrl);
-            landingAreaImgWidth = landingAreaImg.getWidth();
-        }
-        catch (IOException ex) {
+
+    private void LoadContent(int img) {
+        try {
+            if (img == 0) {
+                URL trackImgUrl0 = this.getClass().getResource("/MoonGame/resources/images/track0.png");
+                trackImg = ImageIO.read(trackImgUrl0);
+            } else if (img == 1) {
+                URL trackImgUrl1 = this.getClass().getResource("/MoonGame/resources/images/track1.png");
+                trackImg = ImageIO.read(trackImgUrl1);
+            } else if (img == 2) {
+                URL trackImgUrl2 = this.getClass().getResource("/MoonGame/resources/images/track2.png");
+                trackImg = ImageIO.read(trackImgUrl2);
+            } else if (img == 3) {
+                URL trackImgUrl3 = this.getClass().getResource("/MoonGame/resources/images/track3.png");
+                trackImg = ImageIO.read(trackImgUrl3);
+            }
+
+            //get widht of the track
+            //trackImgWidth = trackImg.getWidth();
+        } catch (IOException ex) {
             Logger.getLogger(Course.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    
-    public void Update(){
+
+    public void Update() {
         y += speed;
     }
-    
-    
-    public void changeColor(){
-        try
-        {
-            URL landingAreaImgUrl = this.getClass().getResource("/MoonGame/resources/images/track2.png");
-            landingAreaImg = ImageIO.read(landingAreaImgUrl);
-            landingAreaImgWidth = landingAreaImg.getWidth();
-        }
-        catch (IOException ex) {
-            Logger.getLogger(Course.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    
+
+    public void changeColor() {
+        this.trackImg = trackImg1;
+
     }
-    
-    
-    
-    
-    
-    
-    
-    public void Draw(Graphics2D g2d)
-    {
+
+    public void Draw(Graphics2D g2d) {
         //this.Update();
-        g2d.drawImage(landingAreaImg, x, y, null);
+        g2d.drawImage(trackImg, x, y, null);
     }
-    
+
 }
