@@ -37,7 +37,7 @@ public class MovingBackground {
         this.xPosition = xPosition;
 
         // We divide frame size with image size do that we get how many times we need to draw image to screen.
-        int numberOfPositions = (Framework.frameHeight / this.image.getHeight()) + 2; // We need to add 2 so that we don't get blank spaces between images.
+        int numberOfPositions = (Framework.frameHeight / this.image.getHeight()) + 8; // We need to add 2 so that we don't get blank spaces between images.
         yPositions = new double[numberOfPositions];
 
         // Set y coordinate for each image that we need to draw.

@@ -48,9 +48,8 @@ public class Course {
     }
 
     private void Initialize(double x, double y) {
-        // X coordinate of the landing area is at 23% frame width.
+        // X and Y coordinate of track passed from game.java
         this.x = (int) (Framework.frameWidth * x);
-        // Y coordinate of the landing area is at 20% frame height.
         this.y = (int) (Framework.frameHeight * y);
     }
 

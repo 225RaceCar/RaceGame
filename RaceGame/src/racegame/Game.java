@@ -35,6 +35,7 @@ public class Game {
     private BufferedImage bg;
     private MovingBackground movingBg;
 
+    //not used
     private int[] courseListList = new int[4];
 
     //the course, last part should be the finish line
@@ -127,7 +128,7 @@ public class Game {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        movingBg.Initialize(bg, -1, Framework.frameWidth / 10);
+        movingBg.Initialize(bg, 4, Framework.frameWidth / 10);
     }
 
     //resets variables in car
@@ -159,7 +160,7 @@ public class Game {
         //AS LONG AS the Y of car is less than Y of the last course, finish line
         //has not been crossed
         //carImgHeight can be removed
-        if (playerCar.y + playerCar.carImgHeight < courseList.get(courseList.size() - 1).y) {
+        if (playerCar.y < courseList.get(courseList.size() - 1).y) {
 
             playerCar.raceWin = true;
             //change the gamestate, on next loop gameover will occur
