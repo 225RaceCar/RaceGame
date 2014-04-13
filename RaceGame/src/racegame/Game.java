@@ -18,10 +18,7 @@ import javax.imageio.ImageIO;
  */
 public class Game {
 
-    //set the FIRST course position place x and y
-    //subsequent courses will be placed by the for loop, multiplies by i
-    private double x = 0.20;
-    private double y = 0.90;
+    
 
     Random random = new Random();
     
@@ -80,28 +77,55 @@ public class Game {
         movingBg = new MovingBackground();
 
     }
+    
+    
+    //set the FIRST course position place x and y
+    //subsequent courses will be placed by the for loop, multiplies by i
+    private int x = 500;
+    private int y = 100;
 
-    //when game is initialized the course is created
+   
+    
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+//when game is initialized the course is created
     private void CreateCourse() {
 
         points = new int[4];
 
         for (int i = 0; i < points.length; i++) {
-            points[i] = random.nextInt(1500) + 100;
+            points[i] = random.nextInt(1500);
         }
 
         for (int j = 0; j < points.length; j++) {
-            points[j] = points[j] / 50 * 2;
+            points[j] = points[j];
             System.out.println("this is index " + j);
             System.out.println("it has a value of  " + points[j]);
-
+            
+            System.out.println("x for course: " + x + 
+                    "\ny for course:" + y);
+            
+            
             for (int i = 0; i < points[j]; i++) {
                 //create course object
-                Course segment = new Course(x, y - (i * 0.035), j);
+                Course segment = new Course(x, y, j);
 
                 //add that course to the CourseList
                 courseList.add(segment);
-
+                //x += 1;
+                y -= 1;
             }
         }
         System.out.println(courseList.size());

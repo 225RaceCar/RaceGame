@@ -15,14 +15,8 @@ import javax.imageio.ImageIO;
  */
 public class Course {
 
-    /**
-     * X coordinate of the landing area.
-     */
+    //x and y coordinates
     public int x;
-
-    /**
-     * Y coordinate of the landing area.
-     */
     public int y;
 
     private double speed = 1;
@@ -37,20 +31,18 @@ public class Course {
 
     private BufferedImage trackImg;
 
-    /**
-     * Width of landing area.
-     */
-    public int trackImgWidth;
+    //width of race car
+    public int courseImgWidth;
 
-    public Course(double x, double y, int img) {
+    public Course(int x, int y, int img) {
         Initialize(x, y);
         LoadContent(img);
     }
 
-    private void Initialize(double x, double y) {
+    private void Initialize(int x, int y) {
         // X and Y coordinate of track passed from game.java
-        this.x = (int) (Framework.frameWidth * x);
-        this.y = (int) (Framework.frameHeight * y);
+        this.x = x;
+        this.y = y;
     }
 
     private void LoadContent(int img) {
@@ -70,7 +62,7 @@ public class Course {
             }
 
             //get widht of the track
-            //trackImgWidth = trackImg.getWidth();
+            //courseImgWidth = trackImg.getWidth();
         } catch (IOException ex) {
             Logger.getLogger(Course.class.getName()).log(Level.SEVERE, null, ex);
         }
