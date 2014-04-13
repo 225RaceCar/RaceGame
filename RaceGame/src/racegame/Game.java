@@ -43,6 +43,10 @@ public class Game {
 
     //image overlayed on bg for when the game is over
     private BufferedImage redBorderImg;
+    
+    //to test which points have been passed
+    boolean[] passedPoint;
+    private int[] passedPointLoc;
 
     public Game() {
         Framework.gameState = Framework.GameState.GAME_CONTENT_LOADING;
@@ -79,60 +83,71 @@ public class Game {
     }
     
     
+    
+
+
+
+
     //set the FIRST course position place x and y
     //subsequent courses will be placed by the for loop, multiplies by i
-    private int x = 500;
-    private int y = 100;
+    private int x = 250;
+    private int y = 600;
 
-   
+
+
+
+
+
+
+    //when game is initialized the course is created
+    private void CreateCourse() {
+
+        points = new int[4];
+        passedPoint = new boolean[4];
+        passedPointLoc = new int[4];
+        
+        for (int i = 0; i < points.length; i++) {
+            points[i] = random.nextInt(1500);
+            passedPoint[i] = false;
+        }
+
+        for (int j = 0; j < points.length; j++) {
+            
+            //used to reset the x after finish line is made 
+            x += 175;
+            
+            //creates the four segments of th course
+            for (int i = 0; i < points[j]; i++) {
+                
+                //create course object
+                Course segment = new Course(x, y, j);
+
+                //add that course to the CourseList
+                courseList.add(segment);
+                y -= 1;
+                
+                
+            }
+            
+            passedPointLoc[j] = courseList.size();
+            
+            //this will set a end of point  times
+            y -= 1;
+            x -= 175;
+            Course segment = new Course(x, y, 4);
+            courseList.add(segment);
+        }
+        System.out.println(courseList.size());
+        //courseList.get(6).changeColor();
+    }
+
     
 
 
 
 
 
-
-
-
-
-
-
-
-
-
-//when game is initialized the course is created
-    private void CreateCourse() {
-
-        points = new int[4];
-
-        for (int i = 0; i < points.length; i++) {
-            points[i] = random.nextInt(1500);
-        }
-
-        for (int j = 0; j < points.length; j++) {
-            //points[j] = points[j];
-            System.out.println("this is index " + j);
-            System.out.println("it has a value of  " + points[j]);
-            
-            System.out.println("x for course: " + x + 
-                    "\ny for course:" + y);
-            
-            
-            for (int i = 0; i < points[j]; i++) {
-                //create course object
-                Course segment = new Course(x, y, j);
-
-                //add that course to the CourseList
-                courseList.add(segment);
-                //x += 1;
-                y -= 1;
-            }
-        }
-        System.out.println(courseList.size());
-        //courseList.get(6).changeColor();
-    }
-
-    //load global resources like the bg and text for the standings
+//load global resources like the bg and text for the standings
     private void LoadContent() {
         try {
             //load bg image
@@ -211,8 +226,26 @@ public class Game {
         for (int i = 0; i < courseList.size(); i++) {
             courseList.get(i).Draw(g2d);
         }
-
-        //draw the cares
+        
+        if(playerCar.getY() < courseList.get(passedPointLoc[0]).getY()){
+            //drawpoint passed
+            g2d.setColor(Color.white);
+            g2d.drawString("Passed Point A!!!", 5, 175);
+        } 
+        
+        if(playerCar.getY() < courseList.get(passedPointLoc[1]).getY()){
+            //drawpoint passed
+            g2d.setColor(Color.white);
+            g2d.drawString("Passed Point B!!!", 5, 200);
+        } 
+        
+        if(playerCar.getY() < courseList.get(passedPointLoc[2]).getY()){
+            //drawpoint passed
+            g2d.setColor(Color.white);
+            g2d.drawString("Passed Point C!!!", 5, 225);
+        } 
+        
+        //draw the cars
         playerCar.Draw(g2d);
         enemyCar.Draw(g2d);
 

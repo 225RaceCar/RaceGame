@@ -28,6 +28,10 @@ public class Course {
     private BufferedImage trackImg1;
     private BufferedImage trackImg2;
     private BufferedImage trackImg3;
+    
+    private BufferedImage trackImgEnd;
+    
+    
 
     private BufferedImage trackImg;
 
@@ -59,6 +63,9 @@ public class Course {
             } else if (img == 3) {
                 URL trackImgUrl3 = this.getClass().getResource("/MoonGame/resources/images/track3.png");
                 trackImg = ImageIO.read(trackImgUrl3);
+            } else if (img == 4){
+                URL trackImgUrlEnd = this.getClass().getResource("/MoonGame/resources/images/track0end.png");
+                trackImg = ImageIO.read(trackImgUrlEnd);
             }
 
             //get widht of the track
@@ -74,9 +81,9 @@ public class Course {
     
 
     public void Update(int speedY, int y) {
-        if(speedY <= -3 || y <= 350){
+        if(speedY <= -4 || y <= 350){
             speed = speedY;
-            this.y -= -24;
+            this.y -= -50;
         } else if(speedY <= -3){
             speed = speedY;
             this.y -= -19;
@@ -94,7 +101,9 @@ public class Course {
     }
     
     
-    
+    public int getY(){
+        return y;
+    }
     
     
     
