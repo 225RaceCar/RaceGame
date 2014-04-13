@@ -11,7 +11,7 @@ import javax.imageio.ImageIO;
 /**
  * Landing area where rocket will land.
  *
- * @author www.gametutorial.net
+ * 
  */
 public class Course {
 
@@ -21,9 +21,7 @@ public class Course {
 
     private double speed = 1;
 
-    /**
-     * Image of landing area.
-     */
+    //different kinds of track image
     private BufferedImage trackImg0;
     private BufferedImage trackImg1;
     private BufferedImage trackImg2;
@@ -32,23 +30,26 @@ public class Course {
     private BufferedImage trackImgEnd;
     
     
-
+    //the "current"tracl image
     private BufferedImage trackImg;
 
     //width of race car
     public int courseImgWidth;
 
+    //constructo calls initialize and loadContent
     public Course(int x, int y, int img) {
         Initialize(x, y);
         LoadContent(img);
     }
-
+    
+    //set the values as needed
     private void Initialize(int x, int y) {
         // X and Y coordinate of track passed from game.java
         this.x = x;
         this.y = y;
     }
 
+    //load content
     private void LoadContent(int img) {
         try {
             if (img == 0) {
@@ -79,7 +80,8 @@ public class Course {
     
     
     
-
+    //when Update is called the game will move the course depending on the 
+    //car position
     public void Update(int speedY, int y) {
         if(speedY <= -4 || y <= 350){
             speed = speedY;

@@ -17,7 +17,7 @@ import javax.swing.JPanel;
  * Create a JPanel on which we will draw and listen for keyboard and mouse
  * events.
  *
- * @author www.gametutorial.net
+ * 
  */
 public abstract class Canvas extends JPanel implements KeyListener, MouseListener {
 
@@ -59,12 +59,6 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
     }
 
     // Keyboard
-    /**
-     * Is keyboard key "key" down?
-     *
-     * @param key Number of key for which you want to check the state.
-     * @return true if the key is down, false if the key is not down.
-     */
     public static boolean keyboardKeyState(int key) {
         return keyboardState[key];
     }
@@ -88,15 +82,6 @@ public abstract class Canvas extends JPanel implements KeyListener, MouseListene
     public abstract void keyReleasedFramework(KeyEvent e);
 
     // Mouse
-    /**
-     * Is mouse button "button" down? Parameter "button" can be
-     * "MouseEvent.BUTTON1" - Indicates mouse button #1 or "MouseEvent.BUTTON2"
-     * - Indicates mouse button #2 ...
-     *
-     * @param button Number of mouse button for which you want to check the
-     * state.
-     * @return true if the button is down, false if the button is not down.
-     */
     public static boolean mouseButtonState(int button) {
         return mouseState[button - 1];
     }

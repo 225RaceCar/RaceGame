@@ -21,34 +21,21 @@ import javax.imageio.ImageIO;
  */
 public class Framework extends Canvas {
 
-    /**
-     * Width of the frame.
-     */
+    //to hold the size of the frame
     public static int frameWidth;
-    /**
-     * Height of the frame.
-     */
     public static int frameHeight;
 
-    /**
-     * Time of one second in nanoseconds. 1 second = 1 000 000 000 nanoseconds
-     */
+    Time of one second in nanoseconds. 1 second = 1 000 000 000 nanoseconds
     public static final long secInNanosec = 1000000000L;
 
-    /**
-     * Time of one millisecond in nanoseconds. 1 millisecond = 1 000 000
-     * nanoseconds
-     */
+    //Time of one millisecond in nanoseconds. 1 millisecond = 1 000 000
+    // * nanoseconds
     public static final long milisecInNanosec = 1000000L;
 
-    /**
-     * FPS - Frames per second How many times per second the game should update?
-     */
+    //FPS - Frames per second How many times per second the game should update?
     private final int GAME_FPS = 16;
 
-    /**
-     * Pause between updates. It is in nanoseconds.
-     */
+    //Pause between updates. It is in nanoseconds.
     private final long GAME_UPDATE_PERIOD = secInNanosec / GAME_FPS;
 
     //create a new enumerated whatever that Framework uses to call game states
@@ -62,9 +49,7 @@ public class Framework extends Canvas {
      */
     public static GameState gameState;
 
-    /**
-     * Elapsed game time in nanoseconds.
-     */
+    //Elapsed game time in nanoseconds.
     private long gameTime;
 
     // It is used for calculating elapsed time.
@@ -73,9 +58,7 @@ public class Framework extends Canvas {
     // The actual game
     private Game game;
 
-    /**
-     * Image for menu.
-     */
+    //ment image
     private BufferedImage moonLanderMenuImg;
 
     public Framework() {
@@ -98,19 +81,12 @@ public class Framework extends Canvas {
         gameThread.start();
     }
 
-    /**
-     * Set variables and objects. This method is intended to set the variables
-     * and objects for this class, variables and objects for the actual game can
-     * be set in Game.java.
-     */
+    
     private void Initialize() {
 
     }
 
-    /**
-     * Load files - images, sounds, ... This method is intended to load files
-     * for this class, files for the actual game can be loaded in Game.java.
-     */
+    //load diles
     private void LoadContent() {
         try {
             URL moonLanderMenuImgUrl = this.getClass().getResource("/MoonGame/resources/images/stardust.png");
@@ -219,10 +195,9 @@ public class Framework extends Canvas {
         }
     }
 
-    /**
-     * Draw the game to the screen. It is called through repaint() method in
-     * GameLoop() method.
-     */
+    
+    
+    //draws things to the screen
     @Override
     public void Draw(Graphics2D g2d) {
 
@@ -257,9 +232,7 @@ public class Framework extends Canvas {
         }
     }
 
-    /**
-     * Starts new game.
-     */
+    //newgame
     private void newGame() {
         // We set gameTime to zero and lastTime to current time for later calculations.
         gameTime = 0;
@@ -269,10 +242,7 @@ public class Framework extends Canvas {
         game = new Game();
     }
 
-    /**
-     * Restart game - reset game time and call RestartGame() method of game
-     * object so that reset some variables.
-     */
+    //restart game, not sure why not working
     private void restartGame() {
         // We set gameTime to zero and lastTime to current time for later calculations.
         gameTime = 0;
@@ -284,12 +254,7 @@ public class Framework extends Canvas {
         gameState = GameState.PLAYING;
     }
 
-    /**
-     * Returns the position of the mouse pointer in game frame/window. If mouse
-     * position is null than this method return 0,0 coordinate.
-     *
-     * @return Point of mouse coordinates.
-     */
+    //supposed to be used to turn the car
     private Point mousePosition() {
         try {
             Point mp = this.getMousePosition();
@@ -304,11 +269,9 @@ public class Framework extends Canvas {
         }
     }
 
-    /**
-     * This method is called when keyboard key is released.
-     *
-     * @param e KeyEvent
-     */
+    
+    
+    
     @Override
     public void keyReleasedFramework(KeyEvent e) {
         switch (gameState) {
@@ -326,11 +289,7 @@ public class Framework extends Canvas {
         }
     }
 
-    /**
-     * This method is called when mouse button is clicked.
-     *
-     * @param e MouseEvent
-     */
+    
     @Override
     public void mouseClicked(MouseEvent e) {
 

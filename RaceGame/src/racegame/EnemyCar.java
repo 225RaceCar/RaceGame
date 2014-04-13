@@ -14,7 +14,7 @@ import javax.imageio.ImageIO;
 /**
  * The space car with which player will have to land.
  *
- * @author www.gametutorial.net
+ * pretty much the same as Car
  */
 public class EnemyCar {
 
@@ -30,58 +30,28 @@ public class EnemyCar {
     //is race over?
     public boolean raceWin;
 
-    /**
-     * Has car crashed?
-     */
+    //has car crashed
     public boolean crashed;
 
     //accelerating speed 
     private int speedAccelerating;
 
-    /**
-     * Stopping/Falling speed of the car. Falling speed because, the gravity
-     * pulls the car down to the moon.
-     */
+    //a general number to slow things down
     private int speedStopping;
 
-    /**
-     * Maximum speed that car can have without having a crash when landing.
-     */
-    public int topLandingSpeed;
-
-    /**
-     * How fast and to which direction car is moving on x coordinate?
-     */
+    //x and y speeds
     private int speedX;
-    /**
-     * How fast and to which direction car is moving on y coordinate?
-     */
     public int speedY;
 
-    /**
-     * Image of the car in air.
-     */
+   
+    
     private BufferedImage carImg;
-    /**
-     * Image of the car when raceWin.
-     */
     private BufferedImage carWonImg;
-    /**
-     * Image of the car when crashed.
-     */
     private BufferedImage carCrashedImg;
-    /**
-     * Image of the car fire.
-     */
-    private BufferedImage carFireImg;
 
-    /**
-     * Width of car.
-     */
+
+    
     public int carImgWidth;
-    /**
-     * Height of car.
-     */
     public int carImgHeight;
 
     public EnemyCar() {
@@ -104,8 +74,7 @@ public class EnemyCar {
         speedAccelerating = 2;
         speedStopping = 1;
 
-        //used for "crossing the finish line"
-        topLandingSpeed = 2;
+        
     }
 
     //load car resources

@@ -100,8 +100,10 @@ public class Game {
 
 
     //when game is initialized the course is created
+    //this holds the logic and places the course
     private void CreateCourse() {
 
+        //these will help set and control logic for courese
         points = new int[4];
         passedPoint = new boolean[4];
         passedPointLoc = new int[4];
@@ -114,7 +116,7 @@ public class Game {
         for (int j = 0; j < points.length; j++) {
             
             //used to reset the x after finish line is made 
-            x += 175;
+            x += 125;
             
             //creates the four segments of th course
             for (int i = 0; i < points[j]; i++) {
@@ -129,11 +131,12 @@ public class Game {
                 
             }
             
+            //we need four indexes of section "finish lines"
             passedPointLoc[j] = courseList.size();
             
             //this will set a end of point  times
             y -= 1;
-            x -= 175;
+            x -= 125;
             Course segment = new Course(x, y, 4);
             courseList.add(segment);
         }
