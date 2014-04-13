@@ -110,7 +110,7 @@ public class Game {
         }
 
         for (int j = 0; j < points.length; j++) {
-            points[j] = points[j];
+            //points[j] = points[j];
             System.out.println("this is index " + j);
             System.out.println("it has a value of  " + points[j]);
             
@@ -177,7 +177,7 @@ public class Game {
         movingBg.Update();
 
         for (int i = 0; i < courseList.size(); i++) {
-            courseList.get(i).Update();
+            courseList.get(i).Update(playerCar.getSpeedY(), playerCar.getY());
         }
 
         // Checks where the player car is. Is it still in the space or is it raceWin or crashed?

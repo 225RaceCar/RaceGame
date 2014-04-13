@@ -67,10 +67,37 @@ public class Course {
             Logger.getLogger(Course.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+    
+    
+    
+    
+    
 
-    public void Update() {
-        y += speed;
+    public void Update(int speedY, int y) {
+        if(speedY <= -3 || y <= 350){
+            speed = speedY;
+            this.y -= -24;
+        } else if(speedY <= -3){
+            speed = speedY;
+            this.y -= -19;
+        } else if(speedY < 0){
+            speed = speedY;
+            this.y -= -10;
+        } else if(y >= 600){
+            speed = speedY * 2;
+            this.y +=speed;
+        }
+        
+        
+        
+        
     }
+    
+    
+    
+    
+    
+    
 
     public void changeColor() {
         this.trackImg = trackImg1;
@@ -78,7 +105,6 @@ public class Course {
     }
 
     public void Draw(Graphics2D g2d) {
-        //this.Update();
         g2d.drawImage(trackImg, x, y, null);
     }
 

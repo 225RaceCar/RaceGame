@@ -117,7 +117,7 @@ public class Car {
 
         //place the car on the canvas
         x = (int) (Framework.frameWidth * 0.20);
-        y = (int) (Framework.frameHeight * 0.90);;
+        y = (int) (Framework.frameHeight * 0.70);;
 
         //speed of the car
         speedX = 0;
@@ -200,6 +200,17 @@ public class Car {
 //                g2d.drawImage(carFireImg, x + 12, y + 66, null);
             g2d.drawImage(carImg, x, y, null);
         }
+    }
+    
+    public int getSpeedY(){
+        return speedY;
+    }
+
+    public int getY(){
+        return y;
+    }
+    public int getX(){
+        return x;
     }
 
 }
