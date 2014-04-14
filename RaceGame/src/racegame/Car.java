@@ -11,11 +11,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 
-/**
- * The car with which player will have to land.
- *
- *
- */
+//the car the player will drive
 public class Car {
 
     //to be used in object creation
@@ -26,7 +22,7 @@ public class Car {
     public int y;
     
     //car top speed
-    public int TOP_SPEED;
+    public double TOP_SPEED;
     
 
     //is race over?
@@ -39,12 +35,12 @@ public class Car {
     private int speedAccelerating;
 
     //sets the speed to counter movement
-    private int speedStopping;
+    private double speedStopping;
     public int topLandingSpeed;
 
     //how fast and in what direction is the car moving
-    private int speedX;
-    public int speedY;
+    private double speedX;
+    public double speedY;
 
     //car images
     private BufferedImage carImg;
@@ -82,24 +78,24 @@ public class Car {
         topLandingSpeed = 2;
     
         //set the top speed
-        TOP_SPEED = 5;
+        TOP_SPEED = 6;
     }
 
     //load car resources
     private void LoadContent() {
         try {
             //set the car image and its size
-            URL carImgUrl = this.getClass().getResource("/MoonGame/resources/images/car.png");
+            URL carImgUrl = this.getClass().getResource("/raceresources/resources/images/car.png");
             carImg = ImageIO.read(carImgUrl);
             carImgWidth = carImg.getWidth();
             carImgHeight = carImg.getHeight();
 
             //set and image for when the race is won
-            URL carWonImgUrl = this.getClass().getResource("/MoonGame/resources/images/car.png");
+            URL carWonImgUrl = this.getClass().getResource("/raceresources/resources/images/car.png");
             carWonImg = ImageIO.read(carWonImgUrl);
             
             //set and image for when the car is crashed
-            URL carCrashedImgUrl = this.getClass().getResource("/MoonGame/resources/images/car.png");
+            URL carCrashedImgUrl = this.getClass().getResource("/raceresources/resources/images/car.png");
             carCrashedImg = ImageIO.read(carCrashedImgUrl);
 
         } catch (IOException ex) {
@@ -117,7 +113,7 @@ public class Car {
 
         //place the car on the canvas
         x = (int) (Framework.frameWidth * 0.20);
-        y = (int) (Framework.frameHeight * 0.70);;
+        y = (int) (Framework.frameHeight * 0.70);
 
         //speed of the car
         speedX = 0;
@@ -136,7 +132,7 @@ public class Car {
         //the following all increase the speed as a key is pressed
         // Calculating speed for moving up 
         if (Canvas.keyboardKeyState(KeyEvent.VK_W)) {
-            if (speedY >= TOP_SPEED * -1) {
+            if (speedY >= TOP_SPEED * - 0.5) {
                 speedY -= speedAccelerating;
             } else {
                 speedY += speedStopping;
@@ -145,7 +141,7 @@ public class Car {
 
         // Calculating speed for moving down.
         if (Canvas.keyboardKeyState(KeyEvent.VK_S)) {
-            if (speedY <= TOP_SPEED) {
+            if (speedY <= TOP_SPEED * 0.5) {
                 speedY += speedAccelerating;
             } else {
                 speedY -= speedStopping;
@@ -182,7 +178,7 @@ public class Car {
         g2d.drawString("Frame size, height " + Framework.frameHeight + ", width  " + Framework.frameWidth, 5, 30);
         g2d.drawString("Car coordinates: " + x + " : " + y, 5, 50);
         
-        g2d.drawString("The car speed is currently: " + speedY, 5, 60);
+        g2d.drawString("The car speed is currently: " + speedY, 5, 65);
 
         // If the car is raceWin.
         //image for winnging
@@ -202,7 +198,7 @@ public class Car {
         }
     }
     
-    public int getSpeedY(){
+    public double getSpeedY(){
         return speedY;
     }
 

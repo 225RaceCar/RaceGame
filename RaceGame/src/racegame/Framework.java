@@ -25,7 +25,7 @@ public class Framework extends Canvas {
     public static int frameWidth;
     public static int frameHeight;
 
-    Time of one second in nanoseconds. 1 second = 1 000 000 000 nanoseconds
+    //Time of one second in nanoseconds. 1 second = 1 000 000 000 nanoseconds
     public static final long secInNanosec = 1000000000L;
 
     //Time of one millisecond in nanoseconds. 1 millisecond = 1 000 000
@@ -89,7 +89,7 @@ public class Framework extends Canvas {
     //load diles
     private void LoadContent() {
         try {
-            URL moonLanderMenuImgUrl = this.getClass().getResource("/MoonGame/resources/images/stardust.png");
+            URL moonLanderMenuImgUrl = this.getClass().getResource("/raceresources/resources/images/stardust.png");
             moonLanderMenuImg = ImageIO.read(moonLanderMenuImgUrl);
         } catch (IOException ex) {
             Logger.getLogger(Framework.class.getName()).log(Level.SEVERE, null, ex);

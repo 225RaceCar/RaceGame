@@ -90,7 +90,7 @@ public class Game {
 
     //set the FIRST course position place x and y
     //subsequent courses will be placed by the for loop, multiplies by i
-    private int x = 250;
+    private int x = Framework.frameWidth / 3;
     private int y = 600;
 
 
@@ -109,7 +109,7 @@ public class Game {
         passedPointLoc = new int[4];
         
         for (int i = 0; i < points.length; i++) {
-            points[i] = random.nextInt(1500);
+            points[i] = random.nextInt(1500 + 200);
             passedPoint[i] = false;
         }
 
@@ -134,11 +134,15 @@ public class Game {
             //we need four indexes of section "finish lines"
             passedPointLoc[j] = courseList.size();
             
-            //this will set a end of point  times
-            y -= 1;
+            //this will set a end of point 
+            //first make room to set the point
+            y -= 40;
             x -= 125;
             Course segment = new Course(x, y, 4);
             courseList.add(segment);
+            
+            //make room for the finish line
+            y -= 40;
         }
         System.out.println(courseList.size());
         //courseList.get(6).changeColor();
@@ -154,23 +158,23 @@ public class Game {
     private void LoadContent() {
         try {
             //load bg image
-            URL bgUrl = this.getClass().getResource("/MoonGame/resources/images/stardust.png");
+            URL bgUrl = this.getClass().getResource("/raceresources/resources/images/stardust.png");
             bg = ImageIO.read(bgUrl);
 
             //loading background image
             //load bg image
-            URL backgroundImageUrl = this.getClass().getResource("/MoonGame/resources/images/stardust.png");
+            URL backgroundImageUrl = this.getClass().getResource("/raceresources/resources/images/stardust.png");
             backgroundImg = ImageIO.read(bgUrl);
 
             //load bg image
-            URL redBorderImgUrl = this.getClass().getResource("/MoonGame/resources/images/red_border.png");
+            URL redBorderImgUrl = this.getClass().getResource("/raceresources/resources/images/red_border.png");
             redBorderImg = ImageIO.read(redBorderImgUrl);
         } //if images not found ooooooooops
         catch (IOException ex) {
             Logger.getLogger(Game.class.getName()).log(Level.SEVERE, null, ex);
         }
 
-        movingBg.Initialize(bg, 4, Framework.frameWidth / 10);
+        movingBg.Initialize(bg, 4, 0);
     }
 
     //resets variables in car
@@ -193,6 +197,7 @@ public class Game {
         // Move the car
         playerCar.Update();
         movingBg.Update();
+        enemyCar.Update(playerCar.getSpeedY(), passedPoint[2]);
 
         for (int i = 0; i < courseList.size(); i++) {
             courseList.get(i).Update(playerCar.getSpeedY(), playerCar.getY());
@@ -234,18 +239,21 @@ public class Game {
             //drawpoint passed
             g2d.setColor(Color.white);
             g2d.drawString("Passed Point A!!!", 5, 175);
+            passedPoint[0] = true;
         } 
         
         if(playerCar.getY() < courseList.get(passedPointLoc[1]).getY()){
             //drawpoint passed
             g2d.setColor(Color.white);
             g2d.drawString("Passed Point B!!!", 5, 200);
+            passedPoint[1] = true;
         } 
         
         if(playerCar.getY() < courseList.get(passedPointLoc[2]).getY()){
             //drawpoint passed
             g2d.setColor(Color.white);
             g2d.drawString("Passed Point C!!!", 5, 225);
+            passedPoint[2] = true;
         } 
         
         //draw the cars
@@ -265,7 +273,7 @@ public class Game {
         Draw(g2d, mousePosition);
 
         //draws the text to restart
-        g2d.drawString("Press space or enter to restart.", Framework.frameWidth / 2 - 100, Framework.frameHeight / 3 + 70);
+        //g2d.drawString("Press space or enter to restart.", Framework.frameWidth / 2 - 100, Framework.frameHeight / 3 + 70);
 
         //draw text to say whether you won or lost
         if (playerCar.raceWin) {
@@ -276,5 +284,10 @@ public class Game {
             g2d.drawString("You have crashed the car!", Framework.frameWidth / 2 - 95, Framework.frameHeight / 3);
             g2d.drawImage(redBorderImg, 0, 0, Framework.frameWidth, Framework.frameHeight, null);
         }
+    }
+    
+    
+    public boolean getPassedPoint(int i){
+        return passedPoint[i];
     }
 }
